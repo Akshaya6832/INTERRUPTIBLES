@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>TRINETRA_COMMON</name>
+	<comment>Shared TRINETRA protocol and IPC support. Not a runtime process.</comment>
+	<projects/>
+	<buildSpec/>
+	<natures>
+		<nature>org.eclipse.cdt.core.cnature</nature>
+	</natures>
+</projectDescription>

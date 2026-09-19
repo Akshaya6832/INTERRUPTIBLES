@@ -1,0 +1,28 @@
+# Engineering student note: trinetra.buildfile.fragment handles deployment, startup, configuration, and target integration.
+# Comments are kept simple so the build/deployment steps are easy to trace.
+# TRINETRA QNX 8.0 boot integration fragment
+#
+# This is a buildfile/IFS fragment, not a shell script. Add it to the Raspberry
+# Pi BSP buildfile only after the six binaries and required libraries are part
+# of the image. The commands execute after procnto starts the boot script.
+#
+# [type=link] /bin/TRINETRA_ALERT=/path/to/TRINETRA_ALERT
+# [type=link] /bin/TRINETRA_WARNING_GOVERNOR=/path/to/TRINETRA_WARNING_GOVERNOR
+# [type=link] /bin/TRINETRA_HAZARD_FUSION=/path/to/TRINETRA_HAZARD_FUSION
+# [type=link] /bin/TRINETRA_VALIDATOR=/path/to/TRINETRA_VALIDATOR
+# [type=link] /bin/TRINETRA_SENSOR_INGEST=/path/to/TRINETRA_SENSOR_INGEST
+# [type=link] /bin/TRINETRA_SENSOR_SIM=/path/to/TRINETRA_SENSOR_SIM
+#
+# Then, in the [+script] section, launch downstream to upstream:
+# [pri=40f] /bin/TRINETRA_ALERT &
+# [pri=35f] /bin/TRINETRA_WARNING_GOVERNOR &
+# [pri=30f] /bin/TRINETRA_HAZARD_FUSION &
+# [pri=25f] /bin/TRINETRA_VALIDATOR &
+# [pri=20f] /bin/TRINETRA_SENSOR_INGEST &
+# [pri=10f] /bin/TRINETRA_SENSOR_SIM &
+#
+# IMPORTANT:
+# 1. Replace the example source paths with the actual BSP build paths.
+# 2. Do not add the simulator to a production image unless the test scenario
+#    is intentionally required at boot.
+# 3. Verify that the target security policy permits these applications.
